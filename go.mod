@@ -1,1 +1,1 @@
-module asynLogger
+module github.com/codeshitmeshit/AsynLogger
