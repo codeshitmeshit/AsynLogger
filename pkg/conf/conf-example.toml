@@ -1,0 +1,10 @@
+[asynLogger]
+open_asyn = 0
+log_mode = 0
+open_oss = 0
+open_cos = 0
+
+oss_endpoint = ""
+oss_accessKeyId = ""
+oss_accessKeySecret = ""
+oss_bucketName = ""
