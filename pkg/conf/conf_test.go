@@ -6,5 +6,6 @@ import (
 )
 
 func TestInit(t *testing.T) {
-	fmt.Println(10233224 % 1)
+	Init("conf.toml")
+	fmt.Println(Cfg.Aliyun.OssBucketName)
 }

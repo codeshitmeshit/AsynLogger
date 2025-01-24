@@ -1,11 +1,14 @@
 package conf
 
 import (
-	"fmt"
 	"log"
 	"os"
 
 	"github.com/BurntSushi/toml"
+)
+
+var (
+	IsInit bool = false
 )
 
 type AliyunOss struct {
@@ -16,16 +19,16 @@ type AliyunOss struct {
 }
 
 type AsynLogger struct {
-	OpenAsyn int `toml:"open_asyn"`
-	LogMode  int `toml:"log_mode"`
-	OpenOss  int `toml:"open_oss"`
-	OpenCos  int `toml:"open_cos"`
-
-	Aliyun AliyunOss `toml:"aliyun"`
+	OutputMode      int `toml:"output_mode"`
+	LogMode         int `toml:"log_mode"`
+	OpenOss         int `toml:"open_oss"`
+	OpenCos         int `toml:"open_cos"`
+	FileStorageMode int `toml:"file_storage_mode"`
 }
 
 type Config struct {
 	AsynLogger `toml:"asyn_logger"`
+	Aliyun     AliyunOss `toml:"aliyun_oss"`
 }
 
 var (
@@ -36,9 +39,10 @@ var (
 func Init(path string) {
 	if path != "" {
 		cfgPath = path
+	} else {
+		cfgPath = "conf.toml"
 	}
 	_, err := os.Stat(cfgPath)
-	fmt.Println(cfgPath)
 
 	if err != nil {
 		log.Println(cfgPath, "config file not found, use default config")
@@ -48,8 +52,8 @@ func Init(path string) {
 			log.Fatal("decode toml failed: ", err)
 		}
 	}
+	IsInit = true
 }
-
 func (Logger *AsynLogger) valueInit() {
 
 }
