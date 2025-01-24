@@ -1,10 +1,23 @@
-[asynLogger]
+[asyn_logger]
+# 0 only_terminal ,  1 only_file , 2 both of them , other will be 0
 open_asyn = 0
+# 0 info , 1 warn , 2 debug , other will be 0
 log_mode = 0
+
+# cloud service(0 close)
 open_oss = 0
 open_cos = 0
 
+# file(only open aync)
+# 0 storage by day , 1 storage by size(m)
+file_stroage_mode = 0
+file_size = 100
+
+
+[[aliyun_oss]]
+# aliyunOSS config
 oss_endpoint = ""
 oss_accessKeyId = ""
 oss_accessKeySecret = ""
-oss_bucketName = ""
+oss_bucketName = "123"
+

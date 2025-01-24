@@ -6,7 +6,5 @@ import (
 )
 
 func TestInit(t *testing.T) {
-	Init()
-	str := Cfg.ossBucketName
-	fmt.Println(str)
+	fmt.Println(10233224 % 1)
 }

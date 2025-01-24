@@ -1,53 +1,49 @@
 package conf
 
 import (
-	"flag"
 	"fmt"
-	"github.com/BurntSushi/toml"
-	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/BurntSushi/toml"
 )
 
-type AsynLogger struct {
-	openAsyn int  `toml:"open_asyn"`
-	logMode  int  `toml:"log_mode"`
-	openOss  bool `toml:"open_oss"`
-	openCos  bool `toml:"open_cos"`
+type AliyunOss struct {
+	OssEndpoint        string `toml:"oss_endpoint"`
+	OssAccessKeyId     string `toml:"oss_accessKeyId"`
+	OssAccessKeySecret string `toml:"oss_accessKeySecret"`
+	OssBucketName      string `toml:"oss_bucketName"`
+}
 
-	ossEndpoint        string `toml:"oss_endpoint"`
-	ossAccessKeyId     string `toml:"oss_accessKeyId"`
-	ossAccessKeySecret string `toml:"oss_accessKeySecret"`
-	ossBucketName      string `toml:"oss_bucketName"`
+type AsynLogger struct {
+	OpenAsyn int `toml:"open_asyn"`
+	LogMode  int `toml:"log_mode"`
+	OpenOss  int `toml:"open_oss"`
+	OpenCos  int `toml:"open_cos"`
+
+	Aliyun AliyunOss `toml:"aliyun"`
+}
+
+type Config struct {
+	AsynLogger `toml:"asyn_logger"`
 }
 
 var (
-	Cfg     = new(AsynLogger)
-	cfgPath = flag.String("config", "conf.toml", "config file path")
+	Cfg     = new(Config)
+	cfgPath = ""
 )
 
-func Init() {
-	_, err := os.Stat(*cfgPath)
-	fmt.Println(*cfgPath)
-	// 打开文件
-	file, err := os.Open(*cfgPath)
-	if err != nil {
-		log.Fatal(err)
+func Init(path string) {
+	if path != "" {
+		cfgPath = path
 	}
-	defer file.Close()
+	_, err := os.Stat(cfgPath)
+	fmt.Println(cfgPath)
 
-	// 读取文件内容
-	content, err := ioutil.ReadAll(file)
 	if err != nil {
-		log.Fatal(err)
-	}
-
-	// 打印文件内容
-	fmt.Println(string(content))
-	if err != nil {
-		log.Println(*cfgPath, "config file not found, use default config")
+		log.Println(cfgPath, "config file not found, use default config")
 	} else {
-		_, err = toml.DecodeFile(*cfgPath, Cfg)
+		_, err = toml.DecodeFile(cfgPath, Cfg)
 		if err != nil {
 			log.Fatal("decode toml failed: ", err)
 		}
