@@ -2,7 +2,7 @@ package terminal
 
 import (
 	"fmt"
-	"github.com/codeshitmeshit/AsynLogger/pkg/constants"
+	"github.com/codeshitmeshit/AsynLogger/constants"
 	"time"
 )
 

@@ -19,11 +19,13 @@ type AliyunOss struct {
 }
 
 type AsynLogger struct {
-	OutputMode      int `toml:"output_mode"`
-	LogMode         int `toml:"log_mode"`
-	OpenOss         int `toml:"open_oss"`
-	OpenCos         int `toml:"open_cos"`
-	FileStorageMode int `toml:"file_storage_mode"`
+	OutputMode      int    `toml:"output_mode"`
+	LogMode         int    `toml:"log_mode"`
+	OpenOss         int    `toml:"open_oss"`
+	OpenCos         int    `toml:"open_cos"`
+	FileStorageMode int    `toml:"file_storage_mode"`
+	FileSize        int    `toml:"file_size"`
+	FilePath        string `toml:"file_path"`
 }
 
 type Config struct {

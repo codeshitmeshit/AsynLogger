@@ -3,7 +3,7 @@ package logger
 import "testing"
 
 func TestInfo(t *testing.T) {
-	Info("hello")
+	MInfo("hello")
 }
 
 func TestWarn(t *testing.T) {
