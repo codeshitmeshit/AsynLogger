@@ -47,7 +47,7 @@ func Init(path string) {
 	_, err := os.Stat(cfgPath)
 
 	if err != nil {
-		log.Println(cfgPath, "config file not found, use default config")
+		//log.Println(cfgPath, "config file not found, use default config")
 	} else {
 		_, err = toml.DecodeFile(cfgPath, Cfg)
 		if err != nil {
