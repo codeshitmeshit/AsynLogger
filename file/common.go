@@ -86,8 +86,6 @@ func init() {
 
 func logWrite(log LogMessage) {
 	NewFile()
-	mtx.Lock()
-	defer mtx.Unlock()
 	text := ""
 	m := log.L
 	if m == 1 {
@@ -104,6 +102,10 @@ func logWrite(log LogMessage) {
 }
 
 func NewFile() {
+
+	mtx.Lock()
+	defer mtx.Unlock()
+
 	now := time.Now().Format(constants.FILE_TIME) + ".log"
 	var err error
 	if currentFile == "" || now[:8] != currentFile[:8] {
