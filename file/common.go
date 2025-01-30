@@ -52,9 +52,13 @@ func init() {
 	}
 	err := util.EnsureDirExists(path)
 	if err != nil {
-		terminal.Debug(err)
+		if conf.Cfg.OutputMode == 2 {
+			terminal.Debug(err)
+		}
 	}
-	terminal.Info(path)
+	if conf.Cfg.OutputMode == 2 {
+		terminal.Info(path)
+	}
 
 	files, err := ioutil.ReadDir(path)
 	if err != nil {
