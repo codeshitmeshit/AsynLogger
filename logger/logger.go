@@ -20,9 +20,7 @@ func init() {
 		conf.Init("../conf/conf.toml")
 	}
 	mode = conf.Cfg.OutputMode
-	if mode == 2 {
-		Info("OutputMode is: " + strconv.Itoa(mode))
-	} else {
+	if mode == 1 || mode == 2 {
 		worker.Log(constants.INFO, time.Now(), "OutputMode is: "+strconv.Itoa(mode))
 	}
 }
