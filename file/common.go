@@ -40,6 +40,10 @@ func writeIn() {
 }
 
 func init() {
+	if conf.Cfg.OutputMode != 2 && conf.Cfg.OutputMode != 1 {
+		return
+	}
+
 	bytesChan = make(chan []byte, 100)
 	fileMode = conf.Cfg.AsynLogger.FileStorageMode
 	fileSize = conf.Cfg.AsynLogger.FileSize
